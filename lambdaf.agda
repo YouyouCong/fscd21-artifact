@@ -75,11 +75,11 @@ mutual
     B2S     : {α β : Ty} {μα μβ : Tr} →
               Exp[ var ] Bool ⟨ μα ⟩ α ⟨ μβ ⟩ β →
               Exp[ var ] Str ⟨ μα ⟩ α ⟨ μβ ⟩ β
-    Control : {τ α β γ γ' τ₁ τ₁' : Ty} {μᵢ μ₀ μ₁ μ₂ μα μβ : Tr} →
+    Control : {τ α β γ γ' τ₁ τ₂ : Ty} {μᵢ μ₀ μ₁ μ₂ μα μβ : Tr} →
               is-id-trail γ μᵢ γ' →
-              compatible (τ₁ ⇒⟨ μ₁ ⟩ τ₁') μ₂ μ₀ →
+              compatible (τ₁ ⇒⟨ μ₁ ⟩ τ₂) μ₂ μ₀ →
               compatible μβ μ₀ μα →
-              (var (τ ⇒ τ₁ ⟨ μ₁ ⟩ τ₁' ⟨ μ₂ ⟩ α) →
+              (var (τ ⇒ τ₁ ⟨ μ₁ ⟩ τ₂ ⟨ μ₂ ⟩ α) →
                Exp[ var ] γ ⟨ μᵢ ⟩ γ' ⟨ ● ⟩ β) →
               Exp[ var ] τ ⟨ μα ⟩ α ⟨ μβ ⟩ β
     Prompt  : {τ α β β' : Ty} {μᵢ μα : Tr} →
@@ -231,12 +231,12 @@ exp3 =
       (Plus (Val (Num 1))
          (Prompt {β' = Nat} (refl , refl , refl)
                  (App (Val (Abs (λ x →
-                              Control {τ₁ = Nat} {τ₁' = Nat} {μ₁ = ●} {μ₂ = ●}
+                              Control {τ₁ = Nat} {τ₂ = Nat} {μ₁ = ●} {μ₂ = ●}
                                       refl refl (refl , refl , refl)
                                       (λ h → Val (Var x)))))
                        (Control {γ = Nat} (refl , refl , refl) refl refl
                                 (λ f →
-                                   Control {τ₁ = Nat} {τ₁' = Nat} {μ₁ = ●} {μ₂ = ●}
+                                   Control {τ₁ = Nat} {τ₂ = Nat} {μ₁ = ●} {μ₂ = ●}
                                            (refl , refl , refl) refl refl
                                            (λ g →
                                               Plus (Val (Num 2))

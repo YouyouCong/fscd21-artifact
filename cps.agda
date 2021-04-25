@@ -194,7 +194,7 @@ cpse (B2S e) =
                       (Val (Var t')))))))))
         (Val (Var t)))))
 
-cpse {var = var} (Control {τ₁ = τ₁} {τ₁' = τ₁'} {μ₁ = μ₁} is-id c₁ c₂ f) =
+cpse {var = var} (Control {τ₁ = τ₁} {τ₂ = τ₂} {μ₁ = μ₁} is-id c₁ c₂ f) =
   Abs (λ k → Val (Abs (λ t →
     App (Val (Abs (λ x → App (App (Val (cpse (f x))) (kid is-id))
                              (Val Emp))))
