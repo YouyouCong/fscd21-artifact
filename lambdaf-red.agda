@@ -85,21 +85,21 @@ data Subst {var} where
          Subst e v e' → 
          Subst (λ y → B2S (e y)) v (B2S e')
 
-  sCon : {τ τ₁ τ₂ τ₃ α β γ γ' : Ty} {μ₀ μ₁ μ₂ μᵢ μα μβ : Tr} →
+  sCon : {τ τ₁ τ₁' τ₃ α β γ γ' : Ty} {μ₀ μ₁ μ₂ μᵢ μα μβ : Tr} →
          {e : var τ₃ →
-              var (τ ⇒ τ₁ ⟨ μ₁ ⟩ τ₂ ⟨ μ₂ ⟩ α) →
+              var (τ ⇒ τ₁ ⟨ μ₁ ⟩ τ₁' ⟨ μ₂ ⟩ α) →
               Exp[ var ] γ ⟨ μᵢ ⟩ γ' ⟨ ● ⟩ β}
          {v : Val[ var ] τ₃}
-         {e' : var (τ ⇒ τ₁ ⟨ μ₁ ⟩ τ₂ ⟨ μ₂ ⟩ α) →
+         {e' : var (τ ⇒ τ₁ ⟨ μ₁ ⟩ τ₁' ⟨ μ₂ ⟩ α) →
                Exp[ var ] γ ⟨ μᵢ ⟩ γ' ⟨ ● ⟩ β}
          {x₁ : is-id-trail γ μᵢ γ'}
-         {x₂ : compatible (τ₁ ⇒⟨ μ₁ ⟩ τ₂) μ₂ μ₀}
+         {x₂ : compatible (τ₁ ⇒⟨ μ₁ ⟩ τ₁') μ₂ μ₀}
          {x₃ : compatible  μβ μ₀ μα} →
-         ((k : var (τ ⇒ τ₁ ⟨ μ₁ ⟩ τ₂ ⟨ μ₂ ⟩ α)) →
+         ((k : var (τ ⇒ τ₁ ⟨ μ₁ ⟩ τ₁' ⟨ μ₂ ⟩ α)) →
                Subst (λ y → (e y) k) v ((e' k))) →
          Subst (λ y → Control x₁ x₂ x₃ (e y))
-               v
-               (Control x₁ x₂ x₃ e')
+                  v
+                  (Control x₁ x₂ x₃ e')
 
   sPro : {τ τ₃ β β' γ : Ty} {μᵢ μα : Tr}
          {e : var τ → Exp[ var ] β ⟨ μᵢ ⟩ β' ⟨ ● ⟩ γ}
