@@ -11,8 +11,8 @@ The expression `exp4` represents the motivating example from Section 2.
 - `lambdaf-red.agda`: The reduction rules of λF.
 The relation `Reduce` serves as the proof of preservation (Theorem 1).
 
-- `cps.agda`: The λC calculus and CPS translation presented in Section 4
-and 6.
+- `cps.agda`: The λC calculus and CPS translation presented in Sections 
+4 and 6.
 The cpse function serves as the proof of type preservation (Theorem 3).
 
 - `lambdac-red.agda`: The reduction rules of λC.
